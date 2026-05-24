@@ -1,0 +1,112 @@
+[
+  {
+    "id": "l001",
+    "timestamp": "2025-03-18T14:31:01.442Z",
+    "host": "SRV-09",
+    "level": "ERROR",
+    "source": "kernel",
+    "message": "Outbound connection refused: 185.220.101.55:4444 — connection attempt blocked by firewall rule FW-2241",
+    "anomaly": true,
+    "anomaly_type": "C2 Communication Attempt",
+    "raw": "Mar 18 14:31:01 SRV-09 kernel: [UFW BLOCK] IN= OUT=eth0 SRC=10.0.18.74 DST=185.220.101.55 PROTO=TCP DPT=4444"
+  },
+  {
+    "id": "l002",
+    "timestamp": "2025-03-18T14:29:44.112Z",
+    "host": "SSO-01",
+    "level": "WARN",
+    "source": "auth",
+    "message": "Failed login attempt #847 for user admin@corp.com from 203.0.113.45 — threshold exceeded, account locked",
+    "anomaly": true,
+    "anomaly_type": "Brute Force Authentication",
+    "raw": "2025-03-18T14:29:44 [WARN] sso-service: login_failed user=admin@corp.com ip=203.0.113.45 attempts=847 action=account_locked"
+  },
+  {
+    "id": "l003",
+    "timestamp": "2025-03-18T14:27:08.881Z",
+    "host": "FW-EDGE-01",
+    "level": "INFO",
+    "source": "firewall",
+    "message": "SYN scan detected from 45.137.21.88 — 2,341 port probe packets in 60s, source blocked",
+    "anomaly": true,
+    "anomaly_type": "Network Reconnaissance",
+    "raw": "2025-03-18T14:27:08 [BLOCK] fw-edge: syn_scan src=45.137.21.88 packets=2341 duration=60s action=block_source"
+  },
+  {
+    "id": "l004",
+    "timestamp": "2025-03-18T14:22:14.003Z",
+    "host": "WS-117",
+    "level": "INFO",
+    "source": "sysmon",
+    "message": "Process creation: cmd.exe spawned by winword.exe — parent-child anomaly, possible macro execution",
+    "anomaly": true,
+    "anomaly_type": "Suspicious Process Chain",
+    "raw": "2025-03-18T14:22:14 EventID=1 Image=cmd.exe ParentImage=winword.exe CommandLine=\"cmd.exe /c powershell -enc JAB...\""
+  },
+  {
+    "id": "l005",
+    "timestamp": "2025-03-18T14:18:30.774Z",
+    "host": "MAIL-GW",
+    "level": "WARN",
+    "source": "email-filter",
+    "message": "Phishing URL blocked in inbound email — domain: microsft-verify.com, sender: noreply@microsft-verify.com",
+    "anomaly": true,
+    "anomaly_type": "Phishing Email Blocked",
+    "raw": "2025-03-18T14:18:30 [QUARANTINE] mail-gw: phishing_detected from=noreply@microsft-verify.com url=https://microsft-verify.com/auth/"
+  },
+  {
+    "id": "l006",
+    "timestamp": "2025-03-18T14:15:02.321Z",
+    "host": "DB-PROD-01",
+    "level": "ERROR",
+    "source": "mysql",
+    "message": "Query error: UNION SELECT detected in input — possible SQL injection attempt, query blocked",
+    "anomaly": true,
+    "anomaly_type": "SQL Injection",
+    "raw": "2025-03-18T14:15:02 [ERROR] mysql: query_blocked sql=\"SELECT * FROM users WHERE id=1 UNION SELECT username,password FROM admin--\""
+  },
+  {
+    "id": "l007",
+    "timestamp": "2025-03-18T14:05:45.119Z",
+    "host": "DC-01",
+    "level": "INFO",
+    "source": "security",
+    "message": "NTLM authentication from non-domain workstation WS-117 — lateral movement indicator",
+    "anomaly": true,
+    "anomaly_type": "Lateral Movement",
+    "raw": "2025-03-18T14:05:45 EventID=4625 SubjectUserName=CORP\\svc_backup WorkstationName=WS-117 LogonType=3"
+  },
+  {
+    "id": "l008",
+    "timestamp": "2025-03-18T13:58:11.887Z",
+    "host": "APP-01",
+    "level": "INFO",
+    "source": "nginx",
+    "message": "HTTP 200 response to /health — uptime check passed, no anomalies",
+    "anomaly": false,
+    "anomaly_type": null,
+    "raw": "2025-03-18T13:58:11 [INFO] nginx: 10.0.1.2 GET /health HTTP/1.1 200 142 0.001s"
+  },
+  {
+    "id": "l009",
+    "timestamp": "2025-03-18T13:55:28.661Z",
+    "host": "FILE-SRV-01",
+    "level": "CRITICAL",
+    "source": "endpoint-edr",
+    "message": "Mass file rename detected — 3,412 files changed to .alphv extension in 90 seconds — RANSOMWARE INDICATOR",
+    "anomaly": true,
+    "anomaly_type": "Ransomware Execution",
+    "raw": "2025-03-18T13:55:28 [CRITICAL] edr: ransomware_activity host=FILE-SRV-01 files_encrypted=3412 ext=.alphv process=svchost.exe"
+  },
+  {
+    "id": "l010",
+    "timestamp": "2025-03-18T13:42:01.552Z",
+    "host": "WS-204",
+    "level": "WARN",
+    "source": "dns",
+    "message": "DGA domain query: xk29fmqpl.top — entropy score 4.8, matches known DGA family Conficker-B",
+    "anomaly": true,
+    "anomaly_type": "DGA Domain Query",
+    "raw": "2025-03-18T13:42:01 [WARN] dns: dga_detected host=WS-204 domain=xk29fmqpl.top entropy=4.8 family=conficker-b"
+  }
+]
