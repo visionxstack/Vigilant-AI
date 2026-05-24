@@ -1,0 +1,90 @@
+[
+  {
+    "id": "inc001",
+    "title": "APT-29 Spear Phishing Campaign — Finance Sector",
+    "severity": "critical",
+    "status": "investigating",
+    "created_at": "2025-03-18T08:15:00Z",
+    "updated_at": "2025-03-18T14:32:00Z",
+    "assigned_to": "Vision KC",
+    "type": "Phishing",
+    "actor": "APT-29",
+    "description": "Nation-state actors deploying sophisticated phishing emails impersonating SWIFT compliance notices. Payload includes modified Cobalt Strike beacon with anti-sandbox evasion.",
+    "affected_systems": ["MAIL-GW", "WS-117", "SRV-09"],
+    "iocs": ["185.244.25.118", "microsft-verify.com", "a1f4cb8e2d01", "AS200651"],
+    "timeline": [
+      { "time": "08:42 UTC", "event": "Initial Recon — SYN scan from 185.244.25.118" },
+      { "time": "09:15 UTC", "event": "Phishing Link Deployed — 47 users received email" },
+      { "time": "10:03 UTC", "event": "Credential Harvest — 3 users clicked link" },
+      { "time": "10:47 UTC", "event": "C2 Callback Detected — Cobalt Strike beacon" }
+    ],
+    "mitre_tactics": ["Initial Access", "Credential Access", "Command and Control"],
+    "risk_score": 94
+  },
+  {
+    "id": "inc002",
+    "title": "BlackCat 3.0 Ransomware — FILE-SRV-01 Encryption Event",
+    "severity": "critical",
+    "status": "contained",
+    "created_at": "2025-03-18T13:50:00Z",
+    "updated_at": "2025-03-18T14:45:00Z",
+    "assigned_to": "Alex Kim",
+    "type": "Ransomware",
+    "actor": "BlackCat/ALPHV",
+    "description": "Double-extortion ransomware variant targeting file server. 3,412 files encrypted with .alphv extension. Data exfiltration via TOR prior to encryption.",
+    "affected_systems": ["FILE-SRV-01", "BACKUP-01"],
+    "iocs": ["185.220.101.55", ".alphv", "vssadmin delete shadows"],
+    "timeline": [
+      { "time": "12:30 UTC", "event": "Initial Access — RDP brute force on FILE-SRV-01" },
+      { "time": "13:15 UTC", "event": "Data Exfiltration — 47GB sent via TOR" },
+      { "time": "13:55 UTC", "event": "Ransomware Execution — mass file encryption" },
+      { "time": "14:10 UTC", "event": "EDR Isolation — host quarantined" }
+    ],
+    "mitre_tactics": ["Initial Access", "Exfiltration", "Impact"],
+    "risk_score": 98
+  },
+  {
+    "id": "inc003",
+    "title": "Credential Stuffing Attack — SSO Portal",
+    "severity": "high",
+    "status": "resolved",
+    "created_at": "2025-03-18T14:25:00Z",
+    "updated_at": "2025-03-18T14:35:00Z",
+    "assigned_to": "Sarah Adler",
+    "type": "Brute Force",
+    "actor": "Unknown",
+    "description": "Distributed botnet conducting credential stuffing using leaked database. 847 authentication attempts targeting SSO portal. 3 successful logins from 2 accounts.",
+    "affected_systems": ["SSO-01"],
+    "iocs": ["203.0.113.45", "AS200651", "residential proxy pool"],
+    "timeline": [
+      { "time": "14:25 UTC", "event": "Attack Commenced — 203.0.113.45 first attempt" },
+      { "time": "14:28 UTC", "event": "Threshold Breached — 500 attempts/min" },
+      { "time": "14:29 UTC", "event": "Account Lockout — admin@corp.com locked" },
+      { "time": "14:30 UTC", "event": "Source Blocked — IP blacklisted at edge" }
+    ],
+    "mitre_tactics": ["Credential Access"],
+    "risk_score": 72
+  },
+  {
+    "id": "inc004",
+    "title": "Lateral Movement — WS-117 to DC-01",
+    "severity": "high",
+    "status": "investigating",
+    "created_at": "2025-03-18T14:05:00Z",
+    "updated_at": "2025-03-18T14:40:00Z",
+    "assigned_to": "Vision KC",
+    "type": "Lateral Movement",
+    "actor": "APT-Nebula",
+    "description": "Compromised workstation WS-117 performing pass-the-hash attack targeting Domain Controller. NTLM relay detected. Possible domain admin escalation attempt.",
+    "affected_systems": ["WS-117", "DC-01"],
+    "iocs": ["10.0.5.44", "NTLM relay", "svc_backup"],
+    "timeline": [
+      { "time": "14:05 UTC", "event": "NTLM Relay Detected from WS-117" },
+      { "time": "14:12 UTC", "event": "DC-01 Authentication Attempted" },
+      { "time": "14:20 UTC", "event": "WS-117 Isolated by EDR" },
+      { "time": "14:38 UTC", "event": "Forensic Image Initiated" }
+    ],
+    "mitre_tactics": ["Lateral Movement", "Privilege Escalation"],
+    "risk_score": 81
+  }
+]
